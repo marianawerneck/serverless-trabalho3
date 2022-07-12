@@ -5,7 +5,7 @@ provider:
   stage: dev
   runtime: nodejs10
   region: us-central1
-  project: serverless-353922
+  project: newproject-355916
   # The GCF credentials can be a little tricky to set up. Luckily we've documented this for you here:
   # https://serverless.com/framework/docs/providers/google/guide/credentials/
   #
@@ -28,6 +28,10 @@ functions:
     handler: insereProduto
     events:
       - http: path
+  compraProduto:
+    handler: compraProduto
+    events:
+      - http: path
   consultaProduto:
     handler: consultaProduto
     events:
@@ -38,6 +42,12 @@ functions:
       - event:
           eventType: providers/cloud.pubsub/eventTypes/topic.publish
           resource: projects/${self:provider.project}/topics/estoque
+  removeActivity:
+    handler: removeActivity
+    events:
+      - event:
+          eventType: providers/cloud.pubsub/eventTypes/topic.publish
+          resource: projects/${self:provider.project}/topics/compra
   # NOTE: the following uses an "event" event (pubSub event in this case).
   # Please create the corresponding resources in the Google Cloud
   # before deploying this service through Serverless

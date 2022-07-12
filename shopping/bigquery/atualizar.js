@@ -1,13 +1,9 @@
 const BigQuery = require('@google-cloud/bigquery').BigQuery
 const instancia = new BigQuery()
 
-module.exports = async function pesquisar (qtd, produto) {
+module.exports = async function atualizar (qtd, produto) {
     const opcoes = {
-        query: `UPDATE * FROM estoque SET quantidade = ${qtd} WHERE produto = ${produto}`
-    }
-
-    if (filtro) {
-        opcoes.query = `${opcoes.query} WHERE ${filtro}`
+        query: `UPDATE shopping.estoque SET quantidade = ${parseInt(qtd)} WHERE produto = "${produto}"`
     }
 
     const tabela = instancia.dataset('shopping').table('estoque')
